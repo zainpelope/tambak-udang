@@ -20,7 +20,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     super.initState();
     Timer(
       const Duration(
-        seconds: 10,
+        seconds: 5,
       ),
       () {
         setState(() {
@@ -44,33 +44,31 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
         child: Center(
           child: Column(
             children: [
-            Container(
-            height: 600,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(
-                    ImgString.logo,
-                  ),
-                  fit: BoxFit.cover),
-            ),
-          ),
-              if (_isLoading)
-                const Expanded(
-                  child: SpinKitWaveSpinner(
-                    color: Colors.green,
-                    size: 100.0,
-                    duration: Duration(milliseconds: 2500),
-                  ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      ImgString.splash,
+                      height: 170,
+                      width: 170,
+                    ),
+                    Text(
+                      "Harta Timur Daya",
+                      style: TextStyle(fontSize: 16),
+                    )
+                  ],
                 ),
-              const SizedBox(
+              ),
+              if (_isLoading)
+                SpinKitWaveSpinner(
+                  color: AppColor.blue,
+                  size: 50.0,
+                  duration: Duration(milliseconds: 2500),
+                ),
+              SizedBox(
                 height: 20,
-              ),
-              const Text(
-                "KELOMPOK USAHA HARTA TIMUR DAYA DESA ROMBEN BARAT SUMENEP",
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(
-                height: 50,
               ),
             ],
           ),

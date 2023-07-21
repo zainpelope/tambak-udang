@@ -6,8 +6,8 @@ import 'package:tambak_undang/theme/app_color.dart';
 import '../theme/img_string.dart';
 import '../widget/profile.dart';
 
-class Suhu extends StatelessWidget {
-  const Suhu({Key? key}) : super(key: key);
+class Air extends StatelessWidget {
+  const Air({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class Suhu extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColor.blue,
         title: const Text(
-          "Temperature",
+          "Water Volume",
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),
@@ -40,9 +40,9 @@ class Suhu extends StatelessWidget {
             ),
             const Profile(),
             const Parameter(
-              text1: "28°",
-              img: ImgString.suhu,
-              text2: "Suhu.",
+              text1: "120",
+              img: ImgString.air,
+              text2: "Volume.",
             ),
             const Tabel(),
             Padding(
