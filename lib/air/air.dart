@@ -44,9 +44,9 @@ class Air extends StatelessWidget {
               img: ImgString.air,
               text2: "Volume.",
             ),
-            const Tabel(),
+           Tabel(),
             Padding(
-              padding: const EdgeInsets.only(top: 470.0),
+              padding: const EdgeInsets.only(top: 580.0),
               child: Grafik(),
             ),
           ],

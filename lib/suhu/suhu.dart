@@ -44,9 +44,9 @@ class Suhu extends StatelessWidget {
               img: ImgString.suhu,
               text2: "Suhu.",
             ),
-            const Tabel(),
+          Tabel(),
             Padding(
-              padding: const EdgeInsets.only(top: 470.0),
+              padding: const EdgeInsets.only(top: 580.0),
               child: Grafik(),
             ),
           ],

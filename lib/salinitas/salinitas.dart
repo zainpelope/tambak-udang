@@ -44,9 +44,9 @@ class Salinitas extends StatelessWidget {
               img: ImgString.salinitas,
               text2: "Salinitas",
             ),
-            const Tabel(),
+            Tabel(),
             Padding(
-              padding: const EdgeInsets.only(top: 470.0),
+              padding: const EdgeInsets.only(top: 580.0),
               child: Grafik(),
             ),
           ],

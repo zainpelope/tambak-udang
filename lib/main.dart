@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tambak_undang/splash/splash.dart';
 
-
 void main() {
   runApp(const MyApp());
 }

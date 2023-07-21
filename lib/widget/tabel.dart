@@ -1,73 +1,77 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class Tabel extends StatelessWidget {
-  const Tabel({Key? key}) : super(key: key);
+  final List<Map<String, dynamic>> data = [
+    {'nomor': 1, 'Paramaeter': 'pH', 'Literatur': '7'},
+    {'nomor': 2, 'Paramaeter': 'Suhu', 'Literatur': '28°C'},
+    {'nomor': 3, 'Paramaeter': 'Salinitas', 'Literatur': '35 ppt'},
+    {'nomor': 4, 'Paramaeter': 'Ketinggian Air', 'Literatur': '120 cm'},
+    // Tambahkan data lainnya sesuai kebutuhan
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 320.0),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25.0,vertical: 20,),
-        child: Table(
-          border: TableBorder.all(),
-          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-          children: const [
-            // Header Tabel
-            TableRow(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: TableCell(child: Center(child: Text('Nomor',style: TextStyle(fontWeight: FontWeight.bold),))),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 25.0,
+          vertical: 20,
+        ),
+        child: Center(
+          child: DataTable(
+            columns: const [
+              DataColumn(
+                label: Text(
+                  'Nomor',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                TableCell(child: Center(child: Text('Parameter',style: TextStyle(fontWeight: FontWeight.bold),))),
-                TableCell(child: Center(child: Text('Literatur',style: TextStyle(fontWeight: FontWeight.bold),))),
-              ],
-            ),
-            // Baris 1
-            TableRow(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: TableCell(child: Center(child: Text('1'))),
+              ),
+              DataColumn(
+                label: Text(
+                  'Paramaeter',
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                TableCell(child: Center(child: Text('pH'))),
-                TableCell(child: Center(child: Text('6,5'))),
-              ],
-            ),
-            // Baris 2
-            TableRow(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: TableCell(child: Center(child: Text('2'))),
+              ),
+              DataColumn(
+                label: Text(
+                  'Literatur',
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                TableCell(child: Center(child: Text('Suhu'))),
-                TableCell(child: Center(child: Text('28*C'))),
-              ],
-            ),
-            TableRow(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: TableCell(child: Center(child: Text('3'))),
-                ),
-                TableCell(child: Center(child: Text('Salinitas'))),
-                TableCell(child: Center(child: Text('10-35 ppt'))),
-              ],
-            ),TableRow(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: TableCell(child: Center(child: Text('4'))),
-                ),
-                TableCell(child: Center(child: Text('Ketinggian Air'))),
-                TableCell(child: Center(child: Text('120 cm'))),
-              ],
-            ),
-          ],
+              ),
+            ],
+            rows: _buildRows(),
+            // Menambahkan border antara sel dalam tabel
+            border: TableBorder.all(color: Colors.grey),
+          ),
         ),
       ),
     );
+  }
+
+  List<DataRow> _buildRows() {
+    // Membuat baris dari data yang diberikan
+    return data.map((item) {
+      return DataRow(cells: [
+        DataCell(
+          Text(
+            item['nomor'].toString(),
+          ),
+        ),
+        DataCell(
+          Text(
+            item['Paramaeter'],
+          ),
+        ),
+        DataCell(
+          Text(
+            item['Literatur'],
+          ),
+        ),
+      ]);
+    }).toList();
   }
 }
