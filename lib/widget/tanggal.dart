@@ -9,7 +9,7 @@ class Tanggal extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 200.0),
       child: Container(
-        padding: const EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.only(left: 10, top: 10),
         margin: const EdgeInsets.symmetric(horizontal: 25),
         width: double.infinity,
         height: 200,
@@ -26,17 +26,68 @@ class Tanggal extends StatelessWidget {
           borderRadius: BorderRadius.circular(
             20,
           ),
-        ),child: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Text("Jumat, 28 Juli 2023",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-          Text("TEMP :"),
-          Text("SALINITAS :"),
-          Text("pH :"),
-          Text("KETINGGIAN AIR :"),
-        ],
-      ),
+        ),
+        child: const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Kamis, 28 Juli 2023",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("TEMP "),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("SALINITAS "),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("pH "),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text("KETINGGIAN AIR "),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(" : 28 C "),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(" : 35 ppt "),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(" : 6,5 "),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(" : 120 cm"),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
