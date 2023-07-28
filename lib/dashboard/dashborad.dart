@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tambak_undang/theme/img_string.dart';
 import 'package:tambak_undang/widget/profile.dart';
+import 'package:tambak_undang/widget/tanggal.dart';
 
 import '../theme/app_color.dart';
 import '../widget/app_button.dart';
@@ -37,9 +38,10 @@ class Dashboard extends StatelessWidget {
             height: 140.0,
             width: double.infinity,
           ),
-         Profile(),
+          const Profile(),
+          const Tanggal(),
           const Padding(
-            padding: EdgeInsets.only(top: 170.0),
+            padding: EdgeInsets.only(top: 390.0),
             child: AppButton(),
           ),
         ],

@@ -7,7 +7,6 @@ class Tabel extends StatelessWidget {
     {'nomor': 2, 'Paramaeter': 'Suhu', 'Literatur': '28°C'},
     {'nomor': 3, 'Paramaeter': 'Salinitas', 'Literatur': '35 ppt'},
     {'nomor': 4, 'Paramaeter': 'Ketinggian Air', 'Literatur': '120 cm'},
-    // Tambahkan data lainnya sesuai kebutuhan
   ];
 
   @override
@@ -44,7 +43,6 @@ class Tabel extends StatelessWidget {
               ),
             ],
             rows: _buildRows(),
-            // Menambahkan border antara sel dalam tabel
             border: TableBorder.all(color: Colors.grey),
           ),
         ),
@@ -53,7 +51,6 @@ class Tabel extends StatelessWidget {
   }
 
   List<DataRow> _buildRows() {
-    // Membuat baris dari data yang diberikan
     return data.map((item) {
       return DataRow(cells: [
         DataCell(
