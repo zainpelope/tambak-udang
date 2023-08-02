@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tambak_undang/services/sharedpref.dart';
 import 'package:tambak_undang/widget/akun.dart';
 
 class Profile extends StatelessWidget {
@@ -30,7 +31,7 @@ class Profile extends StatelessWidget {
       width: double.infinity,
       child: Center(
         child: ListTile(
-          title: const Text("Lukmanul Hakim"),
+          title: Text(SharedPref.getUsername ?? ""),
           subtitle: const Text(
             "login as admin",
             style: TextStyle(

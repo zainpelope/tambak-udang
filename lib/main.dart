@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tambak_undang/services/sharedpref.dart';
 import 'package:tambak_undang/splash/splash.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPref.init();
   runApp(const MyApp());
 }
 

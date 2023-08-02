@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tambak_undang/services/auth_services.dart';
 import '../dashboard/dashborad.dart';
 import '../theme/app_color.dart';
 import '../theme/img_string.dart';
@@ -11,6 +12,7 @@ class FormLogin extends StatefulWidget {
 }
 
 class _FormLoginState extends State<FormLogin> {
+  bool isLoading = false;
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _isChecked = false;
@@ -118,8 +120,8 @@ class _FormLoginState extends State<FormLogin> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColor.blue,
                 ),
-                onPressed: _isChecked ? _login : null,
-                child: const Text('Login'),
+                onPressed: isLoading ? null : _isChecked ? _login : null,
+                child: isLoading ? const Text("Loading...") : const Text('Login'),
               ),
             ],
           ),
@@ -127,19 +129,36 @@ class _FormLoginState extends State<FormLogin> {
       ),
     );
   }
+
   void _login() {
+    setState(() => isLoading = true);
     String username = _usernameController.text;
     String password = _passwordController.text;
-
-    if (username == 'admin' && password == 'admin') {
-      _showSnackBar('Login berhasil');
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const Dashboard()),
+    loginService(username: username, password: password).then((value) {
+      value.fold(
+        (success) {
+          setState(() => isLoading = false);
+          _showSnackBar(success);
+           Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const Dashboard()), (r) => false,
+          );
+        }, 
+        (err) {
+          setState(() => isLoading = false);
+          _showSnackBar(err);
+        }
       );
-    } else {
-      _showSnackBar('Username atau password salah');
-    }
+    });
+    // if (username == 'admin' && password == 'admin') {
+    //   _showSnackBar('Login berhasil');
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(builder: (context) => const Dashboard()),
+    //   );
+    // } else {
+    //   _showSnackBar('Username atau password salah');
+    // }
   }
 
   void _showSnackBar(String message) {

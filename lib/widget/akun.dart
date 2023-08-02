@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tambak_undang/login/login.dart';
+import "package:tambak_undang/services/sharedpref.dart";
 
 import '../theme/app_color.dart';
 import '../theme/img_string.dart';
@@ -27,23 +28,23 @@ class Akun extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              const Expanded(
+              Expanded(
                 child: Column(
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                       backgroundColor: Colors.grey,
                       radius: 100,
                       child: Icon(Icons.person,size: 200,color: Colors.black26,),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     Text(
-                      "Lukmanul Hakim",
+                      SharedPref.getUsername ?? "",
                       style: TextStyle(fontSize: 16),
                     ),
-                    SizedBox(height: 5,),
-                    Text(
+                    const SizedBox(height: 5,),
+                    const Text(
                       "hakimlukman3009@gmail.com",
                       style: TextStyle(fontSize: 12,fontStyle: FontStyle.italic),
                     )
@@ -55,6 +56,7 @@ class Akun extends StatelessWidget {
                   backgroundColor: AppColor.blue,
                 ),
                 onPressed: (){
+                  SharedPref.logout();
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>const FormLogin()));
                 },
                 child: const Text('Logout'),

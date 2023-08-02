@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:tambak_undang/dashboard/dashborad.dart';
+import 'package:tambak_undang/services/sharedpref.dart';
 import '../login/login.dart';
 import '../theme/app_color.dart';
 import '../theme/img_string.dart';
@@ -26,12 +28,21 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
         setState(() {
           _isLoading = false;
         });
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const FormLogin(),
-          ),
-        );
+        if (SharedPref.getToken == null) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const FormLogin(),
+            ),
+          );
+        } else {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const Dashboard(),
+            ),
+          );
+        }
       },
     );
   }
