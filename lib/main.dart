@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:tambak_undang/services/sharedpref.dart';
+import 'package:tambak_undang/splash/splash.dart';
 
 import 'dashboard/dashborad.dart';
 
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  const Dashboard(),
+      home:  const SplashScreenPage(),
     );
   }
 }
