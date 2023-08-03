@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-
+import 'package:tambak_undang/kalender/kalender.dart';
+import 'package:tambak_undang/tabel/tabel_suhu.dart';
+import 'package:tambak_undang/widget/grafik.dart';
 import 'package:tambak_undang/widget/parameter.dart';
 
 import 'package:tambak_undang/theme/app_color.dart';
-import '../kalender/kalender.dart';
-import '../tabel/tabel_salinitas.dart';
 import '../theme/img_string.dart';
 import '../widget/profile.dart';
 
-class Salinitas extends StatelessWidget {
-  const Salinitas({Key? key}) : super(key: key);
+class DataGrafik extends StatelessWidget {
+  const DataGrafik({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class Salinitas extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColor.blue,
         title: const Text(
-          "Salinitas",
+          "Data Grafik",
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),
@@ -41,13 +41,8 @@ class Salinitas extends StatelessWidget {
               width: double.infinity,
             ),
             const Profile(),
-            const Parameter(
-              text1: "35",
-              img: ImgString.salinitas,
-              text2: "Salinitas",
-            ),
             const Padding(
-              padding: EdgeInsets.only(top: 340.0),
+              padding: EdgeInsets.only(top: 200.0),
               child: Row(
                 children: [
                   Expanded(
@@ -64,7 +59,7 @@ class Salinitas extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 425.0),
+              padding: const EdgeInsets.only(top: 280.0),
               child: Center(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -77,7 +72,7 @@ class Salinitas extends StatelessWidget {
                 ),
               ),
             ),
-            TabelSalinitas(),
+
 
           ],
         ),

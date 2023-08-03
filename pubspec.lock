@@ -17,6 +17,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  calendar_date_picker2:
+    dependency: "direct main"
+    description:
+      name: calendar_date_picker2
+      sha256: f7ecd632260f2af6cfb72f6b7878f847b0a61821d50f26df9bd00b0a336d0cac
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.2"
   characters:
     dependency: transitive
     description:
@@ -126,6 +134,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_chart:
+    dependency: "direct main"
+    description:
+      name: flutter_chart
+      sha256: "0779f7e5526a6d2cfb45838bff2cb7c4d72514c1986f020de982ebb3ced6f8b6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.6"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -134,6 +150,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.2"
+  flutter_plot:
+    dependency: "direct main"
+    description:
+      name: flutter_plot
+      sha256: "9773bb95c244c0080a75c30df2c9e6c861a984b4c11d343680802842a0bfdec7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0"
   flutter_spinkit:
     dependency: "direct main"
     description:
@@ -161,7 +185,7 @@ packages:
     source: hosted
     version: "4.0.2"
   intl:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: intl
       sha256: "910f85bce16fb5c6f614e117efa303e85a1731bb0081edf3604a2ae6e9a3cc91"
