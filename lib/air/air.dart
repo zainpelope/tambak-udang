@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tambak_undang/widget/grafik.dart';
 import 'package:tambak_undang/widget/parameter.dart';
 import 'package:tambak_undang/widget/tabel.dart';
 import 'package:tambak_undang/theme/app_color.dart';
@@ -44,11 +43,7 @@ class Air extends StatelessWidget {
               img: ImgString.air,
               text2: "Volume.",
             ),
-           Tabel(),
-            Padding(
-              padding: const EdgeInsets.only(top: 580.0),
-              child: Grafik(),
-            ),
+            Tabel(),
           ],
         ),
       ),

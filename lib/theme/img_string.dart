@@ -6,4 +6,5 @@ class ImgString {
   static const String ph = 'assets/images/ph.png';
   static const String splash = 'assets/images/splash.png';
   static const String iot = 'assets/images/iott.png';
+  static const String grafik = 'assets/images/grafik.png';
 }

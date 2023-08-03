@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tambak_undang/widget/grafik.dart';
+
 import 'package:tambak_undang/widget/parameter.dart';
 import 'package:tambak_undang/widget/tabel.dart';
 import 'package:tambak_undang/theme/app_color.dart';
 import '../theme/img_string.dart';
 import '../widget/profile.dart';
 
-class ph extends StatelessWidget {
-  const ph({Key? key}) : super(key: key);
+class Ph extends StatelessWidget {
+  const Ph({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class ph extends StatelessWidget {
           Tabel(),
             Padding(
               padding: const EdgeInsets.only(top: 580.0),
-              child: Grafik(),
+
             ),
           ],
         ),

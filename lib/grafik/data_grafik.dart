@@ -6,8 +6,8 @@ import 'package:tambak_undang/theme/app_color.dart';
 import '../theme/img_string.dart';
 import '../widget/profile.dart';
 
-class Salinitas extends StatelessWidget {
-  const Salinitas({Key? key}) : super(key: key);
+class DataGrafik extends StatelessWidget {
+  const DataGrafik({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class Salinitas extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColor.blue,
         title: const Text(
-          "Salinitas",
+          "Data Grafik",
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),
@@ -40,11 +40,11 @@ class Salinitas extends StatelessWidget {
             ),
             const Profile(),
             const Parameter(
-              text1: "35",
-              img: ImgString.salinitas,
-              text2: "Salinitas",
+              text1: "6,5",
+              img: ImgString.ph,
+              text2: "pH.",
             ),
-            Tabel(),
+
 
           ],
         ),

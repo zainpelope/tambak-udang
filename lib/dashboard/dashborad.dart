@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tambak_undang/dashboard/tombol_dashboard.dart';
 import 'package:tambak_undang/theme/img_string.dart';
 import 'package:tambak_undang/widget/profile.dart';
 import 'package:tambak_undang/widget/tanggal.dart';
@@ -25,26 +26,28 @@ class Dashboard extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
       ),
-      body: Stack(
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              color: AppColor.blue,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(30),
-                bottomRight: Radius.circular(30),
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                color: AppColor.blue,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(30),
+                  bottomRight: Radius.circular(30),
+                ),
               ),
+              height: 140.0,
+              width: double.infinity,
             ),
-            height: 140.0,
-            width: double.infinity,
-          ),
-          const Profile(),
-          const Tanggal(),
-          const Padding(
-            padding: EdgeInsets.only(top: 390.0),
-            child: AppButton(),
-          ),
-        ],
+            const Profile(),
+            const Tanggal(),
+             Padding(
+              padding: const EdgeInsets.only(top: 470.0),
+              child: TombolDashboard(),
+            ),
+          ],
+        ),
       ),
     );
   }
