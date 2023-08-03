@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Tabel extends StatelessWidget {
-  final List<Map<String, dynamic>> data = [
+class TabelSuhu extends StatelessWidget {
+  final List<Map<String, dynamic>> suhu = [
     {'No': 1, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 07.00 WIB'},
     {'No': 2, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 09.00 WIB'},
     {'No': 3, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 11.00 WIB'},
@@ -60,7 +60,7 @@ class Tabel extends StatelessWidget {
   }
 
   List<DataRow> _buildRows() {
-    return data.map((item) {
+    return suhu.map((item) {
       return DataRow(cells: [
         DataCell(
           Text(

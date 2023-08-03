@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'package:tambak_undang/kalender/kalender.dart';
+import 'package:tambak_undang/tabel/tabel_suhu.dart';
+import 'package:tambak_undang/widget/grafik.dart';
 import 'package:tambak_undang/widget/parameter.dart';
-import 'package:tambak_undang/widget/tabel.dart';
+
 import 'package:tambak_undang/theme/app_color.dart';
 import '../theme/img_string.dart';
 import '../widget/profile.dart';
@@ -39,10 +41,36 @@ class DataGrafik extends StatelessWidget {
               width: double.infinity,
             ),
             const Profile(),
-            const Parameter(
-              text1: "6,5",
-              img: ImgString.ph,
-              text2: "pH.",
+            const Padding(
+              padding: EdgeInsets.only(top: 200.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      children: [Text("Dari Tanggal"), Kalender()],
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: [Text("Sampai Tanggal"), Kalender()],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 280.0),
+              child: Center(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(
+                      0xFF8FCFFF,
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: const Text("Apply"),
+                ),
+              ),
             ),
 
 

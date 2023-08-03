@@ -13,7 +13,7 @@ class Kalender extends StatefulWidget {
 
 class _KalenderState extends State<Kalender> {
   DateTime? _selectedDate;
-  String _buttonText = 'Select a Date';
+  String _buttonText = 'Pilih Tanggal';
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +37,7 @@ class _KalenderState extends State<Kalender> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColor.bg
-            ),
+            style: ElevatedButton.styleFrom(backgroundColor: AppColor.bg),
             onPressed: () async {
               final date = await showCalendarDatePicker2Dialog(
                 context: context,
@@ -57,7 +55,12 @@ class _KalenderState extends State<Kalender> {
                 });
               }
             },
-            child: Text(_buttonText,style: TextStyle(color: Colors.black),),
+            child: Text(
+              _buttonText,
+              style: const TextStyle(
+                color: Colors.black,
+              ),
+            ),
           ),
         ],
       ),

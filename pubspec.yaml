@@ -24,6 +24,8 @@ dependencies:
   shared_preferences: ^2.2.0
   calendar_date_picker2: ^0.5.2
   intl: ^0.17.0
+  flutter_chart: ^0.1.6
+  flutter_plot: ^0.1.0
 
 
 dev_dependencies:

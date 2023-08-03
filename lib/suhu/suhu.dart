@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tambak_undang/kalender/kalender.dart';
+import 'package:tambak_undang/tabel/tabel_suhu.dart';
 import 'package:tambak_undang/widget/parameter.dart';
-import 'package:tambak_undang/widget/tabel.dart';
+
 import 'package:tambak_undang/theme/app_color.dart';
 import '../theme/img_string.dart';
 import '../widget/profile.dart';
@@ -75,7 +76,7 @@ class Suhu extends StatelessWidget {
                 ),
               ),
             ),
-            Tabel(),
+            TabelSuhu(),
           ],
         ),
       ),
