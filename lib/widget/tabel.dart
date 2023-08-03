@@ -1,18 +1,25 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Tabel extends StatelessWidget {
   final List<Map<String, dynamic>> data = [
-    {'nomor': 1, 'Paramaeter': 'pH', 'Literatur': '7'},
-    {'nomor': 2, 'Paramaeter': 'Suhu', 'Literatur': '28°C'},
-    {'nomor': 3, 'Paramaeter': 'Salinitas', 'Literatur': '35 ppt'},
-    {'nomor': 4, 'Paramaeter': 'Ketinggian Air', 'Literatur': '120 cm'},
+    {'No': 1, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 07.00 WIB'},
+    {'No': 2, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 09.00 WIB'},
+    {'No': 3, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 11.00 WIB'},
+    {'No': 4, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 13.00 WIB'},
+    {'No': 5, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 15.00 WIB'},
+    {'No': 6, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 17.00 WIB'},
+    {'No': 7, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 19.00 WIB'},
+    {'No': 8, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 21.00 WIB'},
+    {'No': 9, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 23.00 WIB'},
+    {'No': 10, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 01.00 WIB'},
+    {'No': 11, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 03.00 WIB'},
+    {'No': 12, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 15.00 WIB'},
   ];
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 320.0),
+      padding: const EdgeInsets.only(top: 460.0),
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 25.0,
@@ -23,7 +30,7 @@ class Tabel extends StatelessWidget {
             columns: const [
               DataColumn(
                 label: Text(
-                  'Nomor',
+                  'No',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
@@ -31,19 +38,21 @@ class Tabel extends StatelessWidget {
               ),
               DataColumn(
                 label: Text(
-                  'Paramaeter',
+                  'Suhu',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
               DataColumn(
                 label: Text(
-                  'Literatur',
+                  'Tanggal',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
             ],
             rows: _buildRows(),
-            border: TableBorder.all(color: Colors.grey),
+            border: TableBorder.all(
+              color: Colors.grey,
+            ),
           ),
         ),
       ),
@@ -55,17 +64,17 @@ class Tabel extends StatelessWidget {
       return DataRow(cells: [
         DataCell(
           Text(
-            item['nomor'].toString(),
+            item['No'].toString(),
           ),
         ),
         DataCell(
           Text(
-            item['Paramaeter'],
+            item['Suhu'],
           ),
         ),
         DataCell(
           Text(
-            item['Literatur'],
+            item['Tanggal'],
           ),
         ),
       ]);

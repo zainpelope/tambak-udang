@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:tambak_undang/kalender/kalender.dart';
 import 'package:tambak_undang/widget/parameter.dart';
 import 'package:tambak_undang/widget/tabel.dart';
 import 'package:tambak_undang/theme/app_color.dart';
@@ -44,8 +44,38 @@ class Suhu extends StatelessWidget {
               img: ImgString.suhu,
               text2: "Suhu.",
             ),
-          Tabel(),
-
+            const Padding(
+              padding: EdgeInsets.only(top: 340.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      children: [Text("Dari Tanggal"), Kalender()],
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: [Text("Sampai Tanggal"), Kalender()],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 425.0),
+              child: Center(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(
+                      0xFF8FCFFF,
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: const Text("Apply"),
+                ),
+              ),
+            ),
+            Tabel(),
           ],
         ),
       ),

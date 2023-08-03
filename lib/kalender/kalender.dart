@@ -2,10 +2,10 @@ import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class Kalender extends StatefulWidget {
-  const Kalender({Key? key, required this.title}) : super(key: key);
+import '../theme/app_color.dart';
 
-  final String title;
+class Kalender extends StatefulWidget {
+  const Kalender({super.key});
 
   @override
   State<Kalender> createState() => _KalenderState();
@@ -17,21 +17,12 @@ class _KalenderState extends State<Kalender> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: ListView(
-        children: <Widget>[
-          _buildCalendarDialogButton(),
-        ],
-      ),
-    );
+    return _buildCalendarDialogButton();
   }
 
   _buildCalendarDialogButton() {
     const dayTextStyle =
-    TextStyle(color: Colors.black, fontWeight: FontWeight.w700);
+        TextStyle(color: Colors.black, fontWeight: FontWeight.w700);
     final config = CalendarDatePicker2WithActionButtonsConfig(
       dayTextStyle: dayTextStyle,
       calendarType: CalendarDatePicker2Type.single,
@@ -46,6 +37,9 @@ class _KalenderState extends State<Kalender> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColor.bg
+            ),
             onPressed: () async {
               final date = await showCalendarDatePicker2Dialog(
                 context: context,
@@ -63,7 +57,7 @@ class _KalenderState extends State<Kalender> {
                 });
               }
             },
-            child: Text(_buttonText),
+            child: Text(_buttonText,style: TextStyle(color: Colors.black),),
           ),
         ],
       ),

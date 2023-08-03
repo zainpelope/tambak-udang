@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tambak_undang/dashboard/tombol_dashboard.dart';
 import 'package:tambak_undang/theme/img_string.dart';
 import 'package:tambak_undang/widget/profile.dart';
-import 'package:tambak_undang/widget/tanggal.dart';
+import 'package:tambak_undang/widget/semua_data_dashboard.dart';
 
 import '../theme/app_color.dart';
 import '../widget/app_button.dart';
@@ -41,9 +41,9 @@ class Dashboard extends StatelessWidget {
               width: double.infinity,
             ),
             const Profile(),
-            const Tanggal(),
-             Padding(
-              padding: const EdgeInsets.only(top: 470.0),
+            const SemuaDataDashboard(),
+             const Padding(
+              padding: EdgeInsets.only(top: 470.0),
               child: TombolDashboard(),
             ),
           ],

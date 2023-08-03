@@ -5,8 +5,8 @@ import 'package:tambak_undang/theme/app_color.dart';
 import '../grafik/data_grafik.dart';
 import '../theme/img_string.dart';
 
-class Tanggal extends StatelessWidget {
-  const Tanggal({Key? key}) : super(key: key);
+class SemuaDataDashboard extends StatelessWidget {
+  const SemuaDataDashboard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
