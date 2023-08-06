@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:tambak_undang/services/report_service.dart';
 import 'package:tambak_undang/services/sharedpref.dart';
 import 'package:tambak_undang/splash/splash.dart';
 
@@ -12,6 +15,7 @@ void main() {
   initializeDateFormatting('id_ID');
   initializeDateSymbol();
   runApp(const MyApp());
+  Timer.periodic(const Duration(hours: 2), (Timer t) => getCurrentReport().then((value) => value.fold((l) => SharedPref.saveCurrentReport(l), (r) => null)));
 }
 
 void initializeDateSymbol() {}

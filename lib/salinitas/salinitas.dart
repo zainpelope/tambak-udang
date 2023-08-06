@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:tambak_undang/models/report_model.dart';
+import 'package:tambak_undang/services/sharedpref.dart';
 
 import 'package:tambak_undang/widget/parameter.dart';
 
@@ -8,9 +12,32 @@ import '../tabel/tabel_salinitas.dart';
 import '../theme/img_string.dart';
 import '../widget/profile.dart';
 
-class Salinitas extends StatelessWidget {
+class Salinitas extends StatefulWidget {
   const Salinitas({Key? key}) : super(key: key);
 
+  @override
+  State<Salinitas> createState() => _SalinitasState();
+}
+
+class _SalinitasState extends State<Salinitas> {
+  Timer? timer;
+  ReportModel? currentReport;
+
+  void loadData() => setState(() => currentReport = SharedPref.getCurrentReport);
+
+  @override
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(const Duration(seconds: 30), (timer) => loadData());
+    loadData();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    timer?.cancel();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,8 +68,8 @@ class Salinitas extends StatelessWidget {
               width: double.infinity,
             ),
             const Profile(),
-            const Parameter(
-              text1: "35",
+            Parameter(
+              text1: currentReport?.salinitas.toString() ?? "...",
               img: ImgString.salinitas,
               text2: "Salinitas",
             ),

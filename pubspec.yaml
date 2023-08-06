@@ -8,11 +8,9 @@ version: 1.0.0+1
 environment:
   sdk: ">=3.0.0 <4.0.0"
 
-
 dependencies:
   flutter:
     sdk: flutter
-
 
   cupertino_icons: ^1.0.2
   flutter_spinkit: ^5.1.0
@@ -27,16 +25,13 @@ dependencies:
   flutter_chart: ^0.1.6
   flutter_plot: ^0.1.0
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-
   flutter_lints: ^2.0.0
 
 flutter:
-
   uses-material-design: true
 
   assets:

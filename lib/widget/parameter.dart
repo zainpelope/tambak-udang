@@ -39,7 +39,7 @@ class Parameter extends StatelessWidget {
               child: Center(
                 child: Text(
                   text1,
-                  style: TextStyle(fontSize: 95),
+                  style: TextStyle(fontSize: 70),
                 ),
               ),
             ),
