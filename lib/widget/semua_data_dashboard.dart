@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tambak_undang/theme/app_color.dart';
-
-import '../grafik/data_grafik.dart';
+import '../tabel/data_tabel.dart';
 import '../theme/img_string.dart';
 
 class SemuaDataDashboard extends StatelessWidget {
@@ -105,6 +103,7 @@ class SemuaDataDashboard extends StatelessWidget {
           ),
         ),
         Container(
+          width: double.infinity,
           padding: const EdgeInsets.symmetric(
             horizontal: 25,
           ),
@@ -121,24 +120,16 @@ class SemuaDataDashboard extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const DataGrafik(),
+                  builder: (context) =>  DataTabel(),
                 ),
               );
             },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Image.asset(
-                  ImgString.grafik,
-                ),
-                const Text(
-                  "Data Grafik",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
-                ),
-              ],
+            child: const Text(
+              "Data Tabel",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
             ),
           ),
         ),
