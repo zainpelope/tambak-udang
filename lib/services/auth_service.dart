@@ -1,6 +1,7 @@
 import "package:dartz/dartz.dart";
 import "package:dio/dio.dart";
 import "package:tambak_undang/services/dio_provider.dart";
+import "package:tambak_undang/services/report_service.dart";
 import "package:tambak_undang/services/sharedpref.dart";
 
 Future<Either<String, String>> loginService({required String username, required String password}) async {
@@ -15,9 +16,17 @@ Future<Either<String, String>> loginService({required String username, required 
       final  data = response.data["data"] as Map<String, dynamic>;
       SharedPref.saveUsername(data["username"]);
       SharedPref.saveToken(data["token"]);
-      return Left(message);
+
+      return getCurrentReport().then((value) {
+        return value.fold(
+          (l) {
+            SharedPref.saveCurrentReport(l);
+            return Left(message);
+          }, 
+          (r) => Left(r));
+      });
     }
-    return const Right(errMsg);
+    return Right(response.data["message"] ?? errMsg);
   } on DioException catch (e) {
     return Right(e.message ?? e.response?.data["message"] ?? errMsg);
   }

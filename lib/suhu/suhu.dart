@@ -1,5 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:tambak_undang/kalender/kalender.dart';
+import 'package:tambak_undang/models/report_model.dart';
+import 'package:tambak_undang/services/sharedpref.dart';
 import 'package:tambak_undang/tabel/tabel_suhu.dart';
 import 'package:tambak_undang/widget/parameter.dart';
 
@@ -7,9 +11,32 @@ import 'package:tambak_undang/theme/app_color.dart';
 import '../theme/img_string.dart';
 import '../widget/profile.dart';
 
-class Suhu extends StatelessWidget {
+class Suhu extends StatefulWidget {
   const Suhu({Key? key}) : super(key: key);
 
+  @override
+  State<Suhu> createState() => _SuhuState();
+}
+
+class _SuhuState extends State<Suhu> {
+  Timer? timer;
+  ReportModel? currentReport;
+
+  void loadData() => setState(() => currentReport = SharedPref.getCurrentReport);
+
+  @override
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(const Duration(seconds: 30), (timer) => loadData());
+    loadData();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    timer?.cancel();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,8 +67,8 @@ class Suhu extends StatelessWidget {
               width: double.infinity,
             ),
             const Profile(),
-            const Parameter(
-              text1: "28°",
+            Parameter(
+              text1: "${currentReport?.suhu ?? "..."}°",
               img: ImgString.suhu,
               text2: "Suhu.",
             ),

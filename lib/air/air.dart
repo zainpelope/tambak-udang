@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:tambak_undang/models/report_model.dart';
+import 'package:tambak_undang/services/sharedpref.dart';
 import 'package:tambak_undang/tabel/tabel_volume.dart';
 import 'package:tambak_undang/widget/parameter.dart';
 import 'package:tambak_undang/theme/app_color.dart';
@@ -6,9 +10,32 @@ import '../kalender/kalender.dart';
 import '../theme/img_string.dart';
 import '../widget/profile.dart';
 
-class Air extends StatelessWidget {
+class Air extends StatefulWidget {
   const Air({Key? key}) : super(key: key);
 
+  @override
+  State<Air> createState() => _AirState();
+}
+
+class _AirState extends State<Air> {
+  Timer? timer;
+  ReportModel? currentReport;
+
+  void loadData() => setState(() => currentReport = SharedPref.getCurrentReport);
+
+  @override
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(const Duration(seconds: 30), (timer) => loadData());
+    loadData();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    timer?.cancel();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,8 +66,8 @@ class Air extends StatelessWidget {
               width: double.infinity,
             ),
             const Profile(),
-            const Parameter(
-              text1: "120",
+            Parameter(
+              text1: currentReport?.ketinggianAir.toString() ?? "...",
               img: ImgString.air,
               text2: "Volume.",
             ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tambak_undang/services/auth_services.dart';
+import 'package:tambak_undang/services/auth_service.dart';
 import '../dashboard/dashborad.dart';
 import '../theme/app_color.dart';
 import '../theme/img_string.dart';
@@ -141,7 +141,7 @@ class _FormLoginState extends State<FormLogin> {
           _showSnackBar(success);
            Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) =>  Dashboard()), (r) => false,
+            MaterialPageRoute(builder: (context) => Dashboard()), (r) => false,
           );
         }, 
         (err) {

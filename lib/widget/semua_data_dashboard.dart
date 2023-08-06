@@ -1,12 +1,40 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tambak_undang/models/report_model.dart';
+import 'package:tambak_undang/services/sharedpref.dart';
 import 'package:tambak_undang/theme/app_color.dart';
 
 import '../grafik/data_grafik.dart';
 import '../theme/img_string.dart';
 
-class SemuaDataDashboard extends StatelessWidget {
+class SemuaDataDashboard extends StatefulWidget {
   const SemuaDataDashboard({Key? key}) : super(key: key);
+
+  @override
+  State<SemuaDataDashboard> createState() => _SemuaDataDashboardState();
+}
+
+class _SemuaDataDashboardState extends State<SemuaDataDashboard> {
+  Timer? timer;
+  ReportModel? currentReport;
+
+  void loadData() => setState(() => currentReport = SharedPref.getCurrentReport);
+
+  @override
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(const Duration(seconds: 30), (timer) => loadData());
+    loadData();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    timer?.cancel();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +69,7 @@ class SemuaDataDashboard extends StatelessWidget {
                 20,
               ),
             ),
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -82,19 +110,19 @@ class SemuaDataDashboard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text(" : 28 C "),
+                          Text(" : ${currentReport?.suhu ?? "..."} C "),
                           SizedBox(
                             height: 20,
                           ),
-                          Text(" : 35 ppt "),
+                          Text(" : ${currentReport?.salinitas ?? "..."} ppt "),
                           SizedBox(
                             height: 20,
                           ),
-                          Text(" : 6,5 "),
+                          Text(" : ${currentReport?.ph ?? "..."} "),
                           SizedBox(
                             height: 20,
                           ),
-                          Text(" : 120 cm"),
+                          Text(" : ${currentReport?.ketinggianAir ?? "..."} cm"),
                         ],
                       ),
                     ),

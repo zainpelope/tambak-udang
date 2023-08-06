@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:tambak_undang/models/report_model.dart';
+import 'package:tambak_undang/services/sharedpref.dart';
 import 'package:tambak_undang/tabel/tabel_ph.dart';
 
 import 'package:tambak_undang/widget/parameter.dart';
@@ -8,9 +12,32 @@ import '../kalender/kalender.dart';
 import '../theme/img_string.dart';
 import '../widget/profile.dart';
 
-class Ph extends StatelessWidget {
+class Ph extends StatefulWidget {
   const Ph({Key? key}) : super(key: key);
 
+  @override
+  State<Ph> createState() => _PhState();
+}
+
+class _PhState extends State<Ph> {
+  Timer? timer;
+  ReportModel? currentReport;
+
+  void loadData() => setState(() => currentReport = SharedPref.getCurrentReport);
+
+  @override
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(const Duration(seconds: 30), (timer) => loadData());
+    loadData();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    timer?.cancel();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,8 +68,8 @@ class Ph extends StatelessWidget {
               width: double.infinity,
             ),
             const Profile(),
-            const Parameter(
-              text1: "6,5",
+            Parameter(
+              text1: currentReport?.ph ?? "...",
               img: ImgString.ph,
               text2: "pH.",
             ),
