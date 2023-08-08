@@ -4,9 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tambak_undang/models/report_model.dart';
 import 'package:tambak_undang/services/sharedpref.dart';
+import 'package:tambak_undang/tabel/data_tabel.dart';
 import 'package:tambak_undang/theme/app_color.dart';
 
-import '../grafik/data_grafik.dart';
 import '../theme/img_string.dart';
 
 class SemuaDataDashboard extends StatefulWidget {
@@ -133,6 +133,7 @@ class _SemuaDataDashboardState extends State<SemuaDataDashboard> {
           ),
         ),
         Container(
+          width: double.infinity,
           padding: const EdgeInsets.symmetric(
             horizontal: 25,
           ),
@@ -149,24 +150,16 @@ class _SemuaDataDashboardState extends State<SemuaDataDashboard> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const DataGrafik(),
+                  builder: (context) =>  DataTabel(),
                 ),
               );
             },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Image.asset(
-                  ImgString.grafik,
-                ),
-                const Text(
-                  "Data Grafik",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
-                ),
-              ],
+            child: const Text(
+              "Data Tabel",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
             ),
           ),
         ),

@@ -1,14 +1,10 @@
 import 'dart:async';
 
-import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:tambak_undang/services/report_service.dart';
 import 'package:tambak_undang/services/sharedpref.dart';
 import 'package:tambak_undang/splash/splash.dart';
-
-import 'dashboard/dashborad.dart';
 
 final today = DateUtils.dateOnly(DateTime.now());
 
@@ -35,9 +31,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  const SplashScreenPage(),
+      home: const SplashScreenPage(),
     );
   }
 }
-
-
