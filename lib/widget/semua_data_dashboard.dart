@@ -10,32 +10,9 @@ import 'package:tambak_undang/theme/app_color.dart';
 
 import '../theme/img_string.dart';
 
-class SemuaDataDashboard extends StatefulWidget {
-  const SemuaDataDashboard({Key? key}) : super(key: key);
-
-  @override
-  State<SemuaDataDashboard> createState() => _SemuaDataDashboardState();
-}
-
-class _SemuaDataDashboardState extends State<SemuaDataDashboard> {
-  Timer? timer;
-  ReportModel? currentReport;
-
-  void loadData() => setState(() => currentReport = SharedPref.getCurrentReport);
-
-  @override
-  void initState() {
-    super.initState();
-    timer = Timer.periodic(const Duration(seconds: 30), (timer) => loadData());
-    loadData();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    timer?.cancel();
-  }
-
+class SemuaDataDashboard extends StatelessWidget {
+  const SemuaDataDashboard({Key? key, required this.currentReport}) : super(key: key);
+  final ReportModel? currentReport;
 
   @override
   Widget build(BuildContext context) {

@@ -69,7 +69,7 @@ class _SuhuState extends State<Suhu> {
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(const Duration(seconds: 30), (timer) => loadData());
+    timer = Timer.periodic(const Duration(seconds: 5), (timer) => loadData());
     loadData();
     getAllData();
   }
