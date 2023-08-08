@@ -10,12 +10,13 @@ final today = DateUtils.dateOnly(DateTime.now());
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPref.init();
+  SharedPref.init().then((value) {
+    Timer.periodic(const Duration(hours: 2), (Timer t) => getCurrentReport().then((value) => value.fold((l) => SharedPref.saveCurrentReport(l), (r) => null)));
+  });
   WidgetsFlutterBinding.ensureInitialized();
   initializeDateFormatting('id_ID');
   initializeDateSymbol();
   runApp(const MyApp());
-  Timer.periodic(const Duration(hours: 2), (Timer t) => getCurrentReport().then((value) => value.fold((l) => SharedPref.saveCurrentReport(l), (r) => null)));
 }
 
 void initializeDateSymbol() {}
