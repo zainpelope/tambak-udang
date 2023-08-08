@@ -1,20 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:tambak_undang/models/report_model.dart';
 
 class TabelSuhu extends StatelessWidget {
-  final List<Map<String, dynamic>> suhu = [
-    {'No': 1, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 07.00 WIB'},
-    {'No': 2, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 09.00 WIB'},
-    {'No': 3, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 11.00 WIB'},
-    {'No': 4, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 13.00 WIB'},
-    {'No': 5, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 15.00 WIB'},
-    {'No': 6, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 17.00 WIB'},
-    {'No': 7, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 19.00 WIB'},
-    {'No': 8, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 21.00 WIB'},
-    {'No': 9, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 23.00 WIB'},
-    {'No': 10, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 01.00 WIB'},
-    {'No': 11, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 03.00 WIB'},
-    {'No': 12, 'Suhu': '28°C', 'Tanggal': ' 24 Agustus 2023 . 15.00 WIB'},
-  ];
+  const TabelSuhu({super.key, required this.data});
+  final List<ReportModel> data;
 
   @override
   Widget build(BuildContext context) {
@@ -60,21 +50,21 @@ class TabelSuhu extends StatelessWidget {
   }
 
   List<DataRow> _buildRows() {
-    return suhu.map((item) {
+    return data.asMap().entries.map((item) {
       return DataRow(cells: [
         DataCell(
           Text(
-            item['No'].toString(),
+            (item.key + 1).toString(),
           ),
         ),
         DataCell(
           Text(
-            item['Suhu'],
+            "${item.value.suhu} C",
           ),
         ),
         DataCell(
           Text(
-            item['Tanggal'],
+            DateFormat("dd MMMM yyyy - hh:mm").format(item.value.createdAt),
           ),
         ),
       ]);

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:tambak_undang/models/report_model.dart';
+import 'package:tambak_undang/services/report_service.dart';
 import 'package:tambak_undang/services/sharedpref.dart';
 import 'package:tambak_undang/tabel/tabel_volume.dart';
 import 'package:tambak_undang/widget/parameter.dart';
@@ -20,6 +21,47 @@ class Air extends StatefulWidget {
 class _AirState extends State<Air> {
   Timer? timer;
   ReportModel? currentReport;
+  bool isLoading = false;
+  List<ReportModel> dataTabel = [];
+  DateTime? dateFrom;
+  DateTime? dateTo;
+
+  void getAllData() {
+    setState(() => isLoading = true);
+    getReportByRange(
+      from: DateTime.now().toString().split(" ")[0],
+      to: DateTime.now().toString().split(" ")[0]
+    ).then((value) {
+      value.fold(
+        (l) => setState(() => dataTabel = l), 
+        (r) => _showSnackBar(r));
+      setState(() => isLoading = false);
+    });
+  }
+
+  void getDataByRange() {
+    if (dateFrom == null && dateTo == null) return;
+    setState(() => isLoading = true);
+    getReportByRange(
+      from: dateFrom.toString().split(" ")[0], 
+      to: dateTo.toString().split(" ")[0]
+    ).then((value) {
+      value.fold(
+        (l) => setState(() => dataTabel = l), 
+        (r) => _showSnackBar(r)
+      );
+      setState(() => isLoading = false);
+    });
+  }
+
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
 
   void loadData() => setState(() => currentReport = SharedPref.getCurrentReport);
 
@@ -28,6 +70,7 @@ class _AirState extends State<Air> {
     super.initState();
     timer = Timer.periodic(const Duration(seconds: 30), (timer) => loadData());
     loadData();
+    getAllData();
   }
 
   @override
@@ -50,6 +93,10 @@ class _AirState extends State<Air> {
         ),
         centerTitle: true,
         elevation: 0,
+        bottom: isLoading ? const PreferredSize(
+          preferredSize: Size.fromHeight(6),
+          child: LinearProgressIndicator(), 
+        ) : null,
       ),
       body: SingleChildScrollView(
         child: Stack(
@@ -71,18 +118,31 @@ class _AirState extends State<Air> {
               img: ImgString.air,
               text2: "Volume.",
             ),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(top: 340.0),
               child: Row(
                 children: [
                   Expanded(
                     child: Column(
-                      children: [Text("Dari Tanggal"), Kalender()],
+                      children: [
+                        const Text("Dari Tanggal"), 
+                        Kalender(
+                          lastDate: DateTime.now().subtract(const Duration(days: 1)),
+                          result: (date) => setState(() => dateFrom = date),
+                        )
+                      ],
                     ),
                   ),
                   Expanded(
                     child: Column(
-                      children: [Text("Sampai Tanggal"), Kalender()],
+                      children: [
+                        const Text("Sampai Tanggal"), 
+                        Kalender(
+                          firstDate: dateFrom?.add(const Duration(days: 1)),
+                          lastDate: DateTime.now(),
+                          result: (date) => setState(() => dateTo = date),
+                        )
+                      ],
                     ),
                   ),
                 ],
@@ -97,12 +157,12 @@ class _AirState extends State<Air> {
                       0xFF8FCFFF,
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: getDataByRange,
                   child: const Text("Apply"),
                 ),
               ),
             ),
-            TabelVolume(),
+            TabelVolume(data: dataTabel),
           ],
         ),
       ),

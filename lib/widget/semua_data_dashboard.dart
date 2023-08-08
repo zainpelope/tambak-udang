@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tambak_undang/models/report_model.dart';
 import 'package:tambak_undang/services/sharedpref.dart';
 import 'package:tambak_undang/tabel/data_tabel.dart';
@@ -73,7 +74,7 @@ class _SemuaDataDashboardState extends State<SemuaDataDashboard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Kamis, 28 Juli 2023",
+                  DateFormat("EEEE, dd MMMM yyyy").format(DateTime.now()),
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,

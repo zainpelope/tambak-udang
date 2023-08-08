@@ -1,106 +1,63 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tambak_undang/kalender/kalender.dart';
+import 'package:tambak_undang/models/report_model.dart';
+import 'package:tambak_undang/services/report_service.dart';
 import 'package:tambak_undang/theme/app_color.dart';
 
-class DataTabel extends StatelessWidget {
-  final List<Map<String, dynamic>> dataTabel = [
-    {
-      'No': 1,
-      'Tanggal': '24 Agustus 2023 . 07.00 WIB',
-      'Suhu': '29',
-      'pH': '7',
-      'Salinitas': '25',
-      'Ketinggian Air': '120'
-    },
-    {
-      'No': 2,
-      'Tanggal': '24 Agustus 2023 . 09.00 WIB',
-      'Suhu': '29',
-      'pH': '7',
-      'Salinitas': '25',
-      'Ketinggian Air': '120'
-    },
-    {
-      'No': 3,
-      'Tanggal': '24 Agustus 2023 . 10.00 WIB',
-      'Suhu': '29',
-      'pH': '7',
-      'Salinitas': '25',
-      'Ketinggian Air': '120'
-    },
-    {
-      'No': 4,
-      'Tanggal': '24 Agustus 2023 . 12.00 WIB',
-      'Suhu': '29',
-      'pH': '7',
-      'Salinitas': '25',
-      'Ketinggian Air': '120'
-    },
-    {
-      'No': 5,
-      'Tanggal': '24 Agustus 2023 . 14.00 WIB',
-      'Suhu': '29',
-      'pH': '7',
-      'Salinitas': '25',
-      'Ketinggian Air': '120'
-    },
-    {
-      'No': 6,
-      'Tanggal': '24 Agustus 2023 . 16.00 WIB',
-      'Suhu': '29',
-      'pH': '7',
-      'Salinitas': '25',
-      'Ketinggian Air': '120'
-    },
-    {
-      'No': 7,
-      'Tanggal': '24 Agustus 2023 . 18.00 WIB',
-      'Suhu': '29',
-      'pH': '7',
-      'Salinitas': '25',
-      'Ketinggian Air': '120'
-    },
-    {
-      'No': 8,
-      'Tanggal': '24 Agustus 2023 . 20.00 WIB',
-      'Suhu': '29',
-      'pH': '7',
-      'Salinitas': '25',
-      'Ketinggian Air': '120'
-    },
-    {
-      'No': 9,
-      'Tanggal': '24 Agustus 2023 . 22.00 WIB',
-      'Suhu': '29',
-      'pH': '7',
-      'Salinitas': '25',
-      'Ketinggian Air': '120'
-    },
-    {
-      'No': 10,
-      'Tanggal': '24 Agustus 2023 . 24.00 WIB',
-      'Suhu': '29',
-      'pH': '7',
-      'Salinitas': '25',
-      'Ketinggian Air': '120'
-    },
-    {
-      'No': 11,
-      'Tanggal': '24 Agustus 2023 . 02.00 WIB',
-      'Suhu': '29',
-      'pH': '7',
-      'Salinitas': '25',
-      'Ketinggian Air': '120'
-    },
-    {
-      'No': 12,
-      'Tanggal': '24 Agustus 2023 . 04.00 WIB',
-      'Suhu': '29',
-      'pH': '7',
-      'Salinitas': '25',
-      'Ketinggian Air': '120'
-    },
-  ];
+class DataTabel extends StatefulWidget {
+  @override
+  State<DataTabel> createState() => _DataTabelState();
+}
+
+class _DataTabelState extends State<DataTabel> {
+  bool isLoading = false;
+  List<ReportModel> dataTabel = [];
+  DateTime? dateFrom;
+  DateTime? dateTo;
+
+  void getAllData() {
+    setState(() => isLoading = true);
+    getReportByRange(
+      from: DateTime.now().toString().split(" ")[0],
+      to: DateTime.now().toString().split(" ")[0]
+    ).then((value) {
+      value.fold(
+        (l) => setState(() => dataTabel = l), 
+        (r) => _showSnackBar(r));
+      setState(() => isLoading = false);
+    });
+  }
+
+  void getDataByRange() {
+    if (dateFrom == null && dateTo == null) return;
+    setState(() => isLoading = true);
+    getReportByRange(
+      from: dateFrom.toString().split(" ")[0], 
+      to: dateTo.toString().split(" ")[0]
+    ).then((value) {
+      value.fold(
+        (l) => setState(() => dataTabel = l), 
+        (r) => _showSnackBar(r)
+      );
+      setState(() => isLoading = false);
+    });
+  }
+
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+  
+  @override
+  void initState() {
+    super.initState();
+    getAllData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,21 +72,38 @@ class DataTabel extends StatelessWidget {
         ),
         centerTitle: true,
         elevation: 0,
+        bottom: isLoading ? const PreferredSize(
+          preferredSize: Size.fromHeight(6.0),
+          child: LinearProgressIndicator(),
+        ) : null,
       ),
       body: ListView(
         children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 20.0),
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0),
             child: Row(
               children: [
                 Expanded(
                   child: Column(
-                    children: [Text("Dari Tanggal"), Kalender()],
+                    children: [
+                      const Text("Dari Tanggal"), 
+                      Kalender(
+                        lastDate: DateTime.now().subtract(const Duration(days: 1)),
+                        result: (date) => setState(() => dateFrom = date),
+                      )
+                    ],
                   ),
                 ),
                 Expanded(
                   child: Column(
-                    children: [Text("Sampai Tanggal"), Kalender()],
+                    children: [
+                      const Text("Sampai Tanggal"), 
+                      Kalender(
+                        firstDate: dateFrom?.add(const Duration(days: 1)),
+                        lastDate: DateTime.now(),
+                        result: (date) => setState(() => dateTo = date),
+                      )
+                    ],
                   ),
                 ),
               ],
@@ -144,9 +118,7 @@ class DataTabel extends StatelessWidget {
                     0xFF8FCFFF,
                   ),
                 ),
-                onPressed: () {
-                  // Apply button pressed
-                },
+                onPressed: getDataByRange,
                 child: const Text("Apply"),
               ),
             ),
@@ -223,12 +195,12 @@ class DataTabel extends StatelessWidget {
   }
 
   List<DataRow> _buildRows() {
-    return dataTabel.map((item) {
+    return dataTabel.asMap().entries.map((item) {
       return DataRow(cells: [
         DataCell(
           Center(
             child: Text(
-              item['No'].toString(),
+              (item.key + 1).toString(),
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
             ),
           ),
@@ -236,7 +208,7 @@ class DataTabel extends StatelessWidget {
         DataCell(
           Center(
             child: Text(
-              item['Tanggal'],
+              DateFormat("dd MMMM yyyy - hh:mm").format(item.value.createdAt),
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
             ),
           ),
@@ -244,7 +216,7 @@ class DataTabel extends StatelessWidget {
         DataCell(
           Center(
             child: Text(
-              item['Suhu'],
+              item.value.suhu,
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
             ),
           ),
@@ -252,7 +224,7 @@ class DataTabel extends StatelessWidget {
         DataCell(
           Center(
             child: Text(
-              item['pH'],
+              item.value.ph,
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
             ),
           ),
@@ -260,7 +232,7 @@ class DataTabel extends StatelessWidget {
         DataCell(
           Center(
             child: Text(
-              item['Salinitas'],
+              item.value.salinitas.toString(),
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
             ),
           ),
@@ -268,7 +240,7 @@ class DataTabel extends StatelessWidget {
         DataCell(
           Center(
             child: Text(
-              item['Ketinggian Air'],
+              item.value.ketinggianAir.toString(),
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
             ),
           ),
